@@ -12,10 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'lib/bow_arrow'
-
-Shoes.app :width => BowArrow::Base::SCREEN_WIDTH, :height => BowArrow::Base::SCREEN_HEIGHT, :resizable => false do
-  game = BowArrow::Base.new(self)
-  
-  animate(60) { game.game_loop }
+module BowArrow
+  module Elements
+    class Arrow < Base
+      def draw
+        @x += 5
+        
+        draw_image "arrow.png"
+      end
+      
+      def dead?
+        @x > app.width
+      end
+    end
+  end
 end

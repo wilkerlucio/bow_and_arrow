@@ -12,10 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'lib/bow_arrow'
+require 'lib/bow_arrow/elements'
 
-Shoes.app :width => BowArrow::Base::SCREEN_WIDTH, :height => BowArrow::Base::SCREEN_HEIGHT, :resizable => false do
-  game = BowArrow::Base.new(self)
-  
-  animate(60) { game.game_loop }
+module BowArrow
+	class Base
+		include BowArrow::Elements
+	  
+	  SCREEN_WIDTH  = 640
+		SCREEN_HEIGHT = 480
+		
+		def initialize(app)
+			@app = app
+			@hero = Hero.new app
+		end
+		
+		def game_loop
+			@app.clear do
+				@app.background @app.rgb(0, 128, 0)
+				@hero.draw
+			end
+		end
+	end
 end
