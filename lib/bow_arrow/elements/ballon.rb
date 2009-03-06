@@ -14,13 +14,35 @@
 
 module BowArrow
   module Elements
-    SPRITES_BASE = "sprites"
+    class Ballon < Base
+      attr_accessor :dead
+      
+      def initialize *args
+        super *args
+        
+        @dead = false
+        
+        @width = 39
+        @height = 25
+      end
+      
+      def draw
+        return if dead
+        
+        @y -= 1
+        @y = app.height if @y + @height < 0
+        
+        draw_image "ballon.png"
+      end
+      
+      def collision_bounds
+        {
+          :left   => @x + 1,
+          :top    => @y + 1,
+          :right  => @x + 24,
+          :bottom => @y + 25,    
+        }
+      end
+    end
   end
 end
-
-require 'lib/bow_arrow/elements/base'
-require 'lib/bow_arrow/elements/state_machine'
-
-require 'lib/bow_arrow/elements/hero'
-require 'lib/bow_arrow/elements/arrow'
-require 'lib/bow_arrow/elements/ballon'

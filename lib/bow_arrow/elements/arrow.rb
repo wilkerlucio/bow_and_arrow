@@ -15,6 +15,13 @@
 module BowArrow
   module Elements
     class Arrow < Base
+      def initialize *args
+        super *args
+        
+        @width = 51
+        @height = 5
+      end
+      
       def draw
         @x += 5
         
@@ -23,6 +30,15 @@ module BowArrow
       
       def dead?
         @x > app.width
+      end
+      
+      def collision_bounds
+        {
+          :left   => @x + 49,
+          :top    => @y + 2,
+          :right  => @x + 51,
+          :bottom => @y + 3,    
+        }
       end
     end
   end

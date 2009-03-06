@@ -56,7 +56,7 @@ module BowArrow
       end
       
       def &(other)
-        colliding other
+        colliding? other
       end
       
       private

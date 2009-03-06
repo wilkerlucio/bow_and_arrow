@@ -55,7 +55,7 @@ module BowArrow
       end
       
       def shot_arrow
-        arrow = BowArrow::Elements::Arrow.new app
+        arrow = Arrow.new app
         arrow.x = @x + 60
         arrow.y = @y + 39
         
