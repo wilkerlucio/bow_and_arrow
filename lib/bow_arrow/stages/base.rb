@@ -29,7 +29,37 @@ module BowArrow
       end
       
       def draw
+        app.background app.rgb(0, 128, 0)
+        
         @hero.draw
+        
+        @enemies.each do |enemy|
+          @hero.arrows.each do |arrow|
+            if arrow & enemy
+              enemy.hit
+            end
+          end
+          
+          enemy.draw
+        end
+        
+        @enemies.reject! { |e| e.dead? }
+        
+        if @enemies.length == 0
+          win
+        end
+        
+        if @hero.lives == 0
+          lose
+        end
+      end
+      
+      def win
+        
+      end
+      
+      def lose
+        
       end
     end
   end

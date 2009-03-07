@@ -45,8 +45,8 @@ module BowArrow
         self.class.states[self.current_state]
       end
       
-      def draw
-        self.send(state) if respond_to? state
+      def draw elapsed
+        self.send(state, elapsed) if respond_to? state
       end
     end
   end

@@ -38,17 +38,17 @@ module BowArrow
         end
       end
       
-      add_state :stand do
+      add_state :stand do |elapsed|
         draw_image "hero_stand.png"
       end
       
-      add_state :armed do
+      add_state :armed do |elapsed|
         @y += 1
         
         draw_image "hero_armed.png"
       end
       
-      add_state :waiting do
+      add_state :waiting do |elapsed|
         draw_image "hero_without_arrow.png"
         
         @current_state = :stand if (Time.now - @waiting_from) > 0.2
@@ -64,13 +64,13 @@ module BowArrow
       
       alias :old_draw :draw
       
-      def draw
+      def draw elapsed
         @y = app.mouse[2] - 42
         
-        old_draw
+        old_draw elapsed
         
         @arrows.reject! { |arrow| arrow.dead? }
-        @arrows.each { |arrow| arrow.draw }
+        @arrows.each { |arrow| arrow.draw elapsed }
       end
     end
   end
