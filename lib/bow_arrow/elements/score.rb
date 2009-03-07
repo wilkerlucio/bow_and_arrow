@@ -14,14 +14,25 @@
 
 module BowArrow
   module Elements
-    SPRITES_BASE = "sprites"
+    class Score < Base
+      attr_accessor :score
+      
+      def initialize *args
+        super *args
+        
+        @x = app.width - 200
+        @y = 0
+        
+        @score = 0
+      end
+      
+      def draw
+        app.para "Score #{@score}", :left => @x, :top => @y
+      end
+      
+      def <<(value)
+        @score += value
+      end
+    end
   end
 end
-
-require 'lib/bow_arrow/elements/base'
-require 'lib/bow_arrow/elements/state_machine'
-
-require 'lib/bow_arrow/elements/hero'
-require 'lib/bow_arrow/elements/arrow'
-require 'lib/bow_arrow/elements/ballon'
-require 'lib/bow_arrow/elements/score'

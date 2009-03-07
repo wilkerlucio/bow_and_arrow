@@ -26,6 +26,10 @@ module BowArrow
         @height = 25
       end
       
+      def dead?
+        dead
+      end
+      
       def draw
         return if dead
         

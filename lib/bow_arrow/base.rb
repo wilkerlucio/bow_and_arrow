@@ -25,6 +25,7 @@ module BowArrow
       @app = app
       @hero = Hero.new app
       @ballons = []
+      @score = Score.new app
       
       15.times do |i|
         ballon = Ballon.new @app
@@ -43,13 +44,17 @@ module BowArrow
           @hero.arrows.each do |a|
             if a & b
               b.dead = true
+              @score << 10
             end
           end
           
           b.draw
         end
         
+        @ballons.reject! {|b| b.dead?}
+        
         @hero.draw
+        @score.draw
       end
     end
   end
