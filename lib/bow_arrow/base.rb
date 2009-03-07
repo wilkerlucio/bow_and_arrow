@@ -13,10 +13,13 @@
 # limitations under the License.
 
 require 'lib/bow_arrow/elements'
+require 'lib/bow_arrow/stages'
 
 module BowArrow
   class Base
     include BowArrow::Elements
+    
+    attr_reader :app
     
     SCREEN_WIDTH  = 640
     SCREEN_HEIGHT = 480
