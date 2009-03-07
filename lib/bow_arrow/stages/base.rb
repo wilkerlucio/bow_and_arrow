@@ -28,10 +28,10 @@ module BowArrow
         @game.app
       end
       
-      def draw
+      def draw elapsed
         app.background app.rgb(0, 128, 0)
         
-        @hero.draw
+        @hero.draw elapsed
         
         @enemies.each do |enemy|
           @hero.arrows.each do |arrow|
@@ -40,7 +40,7 @@ module BowArrow
             end
           end
           
-          enemy.draw
+          enemy.draw elapsed
         end
         
         @enemies.reject! { |e| e.dead? }
