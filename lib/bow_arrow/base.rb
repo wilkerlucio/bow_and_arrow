@@ -32,7 +32,7 @@ module BowArrow
       
       15.times do |i|
         ballon = Ballon.new @app
-        ballon.x = 250 + ballon.height * i
+        ballon.x = 250 + ballon.width * i
         ballon.y = @app.height - ballon.height
         
         @ballons << ballon

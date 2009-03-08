@@ -24,23 +24,34 @@ module BowArrow
         
         @alive = true
         
-        @width = 39
-        @height = 25
+        @width = 25
+        @height = 39
+        
+        @speed_up = 60
+        @speed_down = 60
       end
       
       add_state :floating do |elapsed|
-        @y -= 60 * elapsed
+        @y -= @speed_up * elapsed
         @y = app.height if @y + @height < 0
         
-        draw_image "ballon.png"
+        draw_image image
       end
       
       add_state :falling do |elapsed|
-        @y += 60 * elapsed
+        @y += @speed_down * elapsed
         
-        draw_image "ballon_dead.png", 7
+        draw_image image_dead, 7
         
         @discard = true if @y > app.height
+      end
+      
+      def image
+        "ballon.png"
+      end
+      
+      def image_dead
+        "ballon_dead.png"
       end
       
       def hit
