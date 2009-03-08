@@ -14,16 +14,31 @@
 
 module BowArrow
   module Elements
-    SPRITES_BASE = "sprites"
+    class Paper < Base
+      attr_accessor :text
+      
+      def initialize *args
+        super *args
+        
+        @text = ""
+        @width = 286
+        @height = 220
+        
+        @x = app.width / 2 - @width / 2
+        @y = app.height / 2 - @height / 2
+      end
+      
+      def draw elapsed
+        draw_image "paper.png"
+        
+        app.para @text,
+          :left => @x,
+          :top => @y + 15,
+          :width => @width,
+          :align => "center",
+          :size => "8px",
+          :leading => 1
+      end
+    end
   end
 end
-
-require 'lib/bow_arrow/elements/base'
-require 'lib/bow_arrow/elements/collection'
-require 'lib/bow_arrow/elements/state_machine'
-
-require 'lib/bow_arrow/elements/hero'
-require 'lib/bow_arrow/elements/arrow'
-require 'lib/bow_arrow/elements/ballon'
-require 'lib/bow_arrow/elements/score'
-require 'lib/bow_arrow/elements/paper'

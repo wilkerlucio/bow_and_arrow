@@ -21,7 +21,6 @@ module BowArrow
         @game = game
         
         @hero = Hero.new app
-        @enemies = []
       end
       
       def app
