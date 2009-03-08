@@ -24,13 +24,13 @@ module BowArrow
     SCREEN_WIDTH  = 640
     SCREEN_HEIGHT = 480
     
-    STAGES = [Stages::Stage01Training, Stages::Stage02MoreTraining]
+    STAGES = [Stages::Stage01Training, Stages::Stage02MoreTraining, Stages::Stage03Slimes]
     
     def initialize(app)
       @app = app
       @score = Score.new @app
       
-      @cur_stage = -1
+      @cur_stage = 1
       
       self.next
     end

@@ -13,36 +13,44 @@
 # limitations under the License.
 
 module BowArrow
-  module Elements
-    class Arrow < Base
-      def initialize *args
-        super *args
+  module Stages
+    class Stage03Slimes < Base
+      include TimerMachine
+      
+      def start_level
+        @briefing = <<EOF
+The slimes are comming!
+Don't let their pass!
+EOF
         
-        @width = 51
-        @height = 5
-      end
-      
-      def draw elapsed
-        @x += 300 * elapsed
+        @slimes_left = 100
+        @frequency = 0.02
         
-        draw_image "arrow.png"
+        add_timer 3, 0 do
+          @frequency += 0.002
+        end
       end
       
-      def discard?
-        @x > app.width
+      def stage_loop(elapsed)
+        if rand < @frequency
+          create_slime
+        end
       end
       
-      def collision_bounds
-        {
-          :left   => @x + 49,
-          :top    => @y + 2,
-          :right  => @x + 51,
-          :bottom => @y + 3,    
-        }
+      def create_slime
+        return if @slimes_left == 0
+        
+        @slimes_left -= 1
+        
+        slime = Elements::Slime.new app
+        slime.x = app.width
+        slime.y = rand(480 - slime.height)
+        
+        @enemies << slime
       end
       
-      def destroy
-        @x = app.width + 200
+      def win?
+        @slimes_left == 0 and @enemies.length == 0
       end
     end
   end

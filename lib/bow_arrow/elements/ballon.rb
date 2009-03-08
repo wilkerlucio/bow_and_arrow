@@ -74,6 +74,8 @@ module BowArrow
         @alive = false
         
         @current_state = :falling
+        
+        false
       end
       
       def alive?

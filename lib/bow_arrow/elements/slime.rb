@@ -14,35 +14,45 @@
 
 module BowArrow
   module Elements
-    class Arrow < Base
+    class Slime < Base
+      include StateMachine
+      include TimerMachine
+      
+      add_state :stand do |elapsed|
+        @x -= 50 * elapsed
+        
+        draw_image "slime.png"
+      end
+      
+      add_state :dead do |elapsed|
+        @x -= 10 * elapsed
+        
+        draw_image "slime_dead.png"
+      end
+      
       def initialize *args
         super *args
         
-        @width = 51
-        @height = 5
-      end
-      
-      def draw elapsed
-        @x += 300 * elapsed
+        @alive = true
         
-        draw_image "arrow.png"
+        @width = 39
+        @height = 49
       end
       
-      def discard?
-        @x > app.width
+      def hit
+        @alive = false
+        
+        @current_state = :dead
+        
+        add_timer 0.6 do
+          @discard = true
+        end
+        
+        true
       end
       
-      def collision_bounds
-        {
-          :left   => @x + 49,
-          :top    => @y + 2,
-          :right  => @x + 51,
-          :bottom => @y + 3,    
-        }
-      end
-      
-      def destroy
-        @x = app.width + 200
+      def alive?
+        @alive
       end
     end
   end

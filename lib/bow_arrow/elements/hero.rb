@@ -81,6 +81,10 @@ module BowArrow
         @arrows.compact!
         @arrows.draw elapsed
       end
+      
+      def hit
+        @alive = false
+      end
     end
   end
 end
