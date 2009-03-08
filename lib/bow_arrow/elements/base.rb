@@ -20,10 +20,13 @@ module BowArrow
       
       def initialize(app, options = {})
         @app = app
-        @x = 0
-        @y = 0
-        @width = 0
-        @height = 0
+        
+        options.default = 0
+        
+        @x = options[:x]
+        @y = options[:y]
+        @width = options[:width]
+        @height = options[:height]
         @discard = false
       end
       
