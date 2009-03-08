@@ -33,7 +33,6 @@ module BowArrow
           if @current_state == :armed
             shot_arrow
             
-            #@waiting_from = Time.now
             @current_state = :waiting
             
             add_timer 0.2 do
@@ -68,8 +67,6 @@ module BowArrow
       alias :old_draw :draw
       
       def draw elapsed
-        update_timers elapsed
-        
         @y = app.mouse[2] - 42
         
         old_draw elapsed

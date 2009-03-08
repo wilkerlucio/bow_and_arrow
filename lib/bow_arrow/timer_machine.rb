@@ -70,5 +70,20 @@ module BowArrow
       
       @timers.reject! { |timer| timer.discard? }
     end
+    
+    def self.included(base)
+      #automatic hook draw if the class contains this method
+      if base.method_defined? :draw
+        base.class_eval do
+          alias :timer_old_draw :draw
+          
+          def draw(elapsed)
+            update_timers elapsed
+            
+            timer_old_draw elapsed
+          end
+        end
+      end
+    end
   end
 end
