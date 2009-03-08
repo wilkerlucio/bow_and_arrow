@@ -68,7 +68,7 @@ module BowArrow
       end
       
       def dead?
-        !alive
+        !alive?
       end
       
       def discard?

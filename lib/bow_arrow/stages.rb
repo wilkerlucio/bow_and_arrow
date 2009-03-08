@@ -13,3 +13,5 @@
 # limitations under the License.
 
 require 'lib/bow_arrow/stages/base'
+require 'lib/bow_arrow/stages/stage_01_training'
+require 'lib/bow_arrow/stages/stage_02_more_training'

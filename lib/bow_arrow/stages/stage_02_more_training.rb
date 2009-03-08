@@ -12,39 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'lib/bow_arrow/elements'
-require 'lib/bow_arrow/stages'
-
 module BowArrow
-  class Base
-    include BowArrow::Elements
-    
-    attr_reader :app, :score
-    
-    SCREEN_WIDTH  = 640
-    SCREEN_HEIGHT = 480
-    
-    STAGES = [Stages::Stage01Training, Stages::Stage02MoreTraining]
-    
-    def initialize(app)
-      @app = app
-      @score = Score.new @app
-      
-      @cur_stage = -1
-      
-      self.next
-    end
-    
-    def game_loop(elapsed)
-      @app.clear do
-        @stage.draw elapsed
+  module Stages
+    class Stage02MoreTraining < Base
+      def start_level
+        @briefing = <<EOF
+Ok, you got the basics
+Now let's shot at more ballons
+EOF
+        
+        15.times do
+          ballon = Ballon.new app
+          ballon.x = 250 + rand(300)
+          ballon.y = app.height - (rand 400) - ballon.height
+
+          @enemies << ballon
+        end
+        
+        5.times do |i|
+          ballon = BallonYellow.new app
+          ballon.x = 250 + rand(300)
+          ballon.y = app.height - (rand 400) - ballon.height
+
+          @enemies << ballon
+        end
       end
-    end
-    
-    def next
-      @cur_stage += 1 unless @cur_stage + 1 == STAGES.length
-      
-      @stage = STAGES[@cur_stage].new self
     end
   end
 end

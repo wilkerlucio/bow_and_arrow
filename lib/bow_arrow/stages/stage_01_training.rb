@@ -12,39 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'lib/bow_arrow/elements'
-require 'lib/bow_arrow/stages'
-
 module BowArrow
-  class Base
-    include BowArrow::Elements
-    
-    attr_reader :app, :score
-    
-    SCREEN_WIDTH  = 640
-    SCREEN_HEIGHT = 480
-    
-    STAGES = [Stages::Stage01Training, Stages::Stage02MoreTraining]
-    
-    def initialize(app)
-      @app = app
-      @score = Score.new @app
-      
-      @cur_stage = -1
-      
-      self.next
-    end
-    
-    def game_loop(elapsed)
-      @app.clear do
-        @stage.draw elapsed
+  module Stages
+    class Stage01Training < Base
+      def start_level
+        @briefing = <<EOF
+Ruby Bow and Arrow
+
+This game is a remake of
+the old win95 bow and arrow
+game
+
+made by
+Wilker Lucio
+EOF
+        
+        15.times do |i|
+          ballon = Ballon.new app
+          ballon.x = 250 + ballon.width * i
+          ballon.y = app.height - ballon.height
+
+          @enemies << ballon
+        end
       end
-    end
-    
-    def next
-      @cur_stage += 1 unless @cur_stage + 1 == STAGES.length
-      
-      @stage = STAGES[@cur_stage].new self
     end
   end
 end

@@ -23,23 +23,30 @@ module BowArrow
       def initialize *args
         super *args
         
+        @alive = true
         @arrows = Collection.new
-        
+      end
+      
+      def active_events
         app.click do
           @current_state = :armed if @current_state == :stand
         end
-        
+      
         app.release do
           if @current_state == :armed
             shot_arrow
-            
+          
             @current_state = :waiting
-            
+          
             add_timer 0.2 do
               @current_state = :stand
             end
           end
         end
+      end
+      
+      def alive?
+        @alive
       end
       
       add_state :stand do |elapsed|
