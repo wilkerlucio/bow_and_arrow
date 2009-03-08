@@ -52,7 +52,11 @@ module BowArrow
     end
     
     def add_timer *args, &block
-      self.timers << Timer.new(*args, &block)
+      timer = Timer.new(*args, &block)
+      
+      self.timers << timer
+      
+      timer
     end
     
     def timers
