@@ -22,6 +22,8 @@ module BowArrow
         @x -= 50 * elapsed
         
         draw_image "slime.png"
+        
+        @discard = true if @x + @width < 0
       end
       
       add_state :dead do |elapsed|
