@@ -69,7 +69,7 @@ module BowArrow
         
         old_draw elapsed
         
-        @arrows.reject! { |arrow| arrow.dead? }
+        @arrows.reject! { |arrow| arrow.discard? }
         @arrows.each { |arrow| arrow.draw elapsed }
       end
     end

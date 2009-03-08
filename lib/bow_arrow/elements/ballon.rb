@@ -15,32 +15,42 @@
 module BowArrow
   module Elements
     class Ballon < Base
-      attr_accessor :dead
+      include StateMachine
+      
+      attr_accessor :alive
       
       def initialize *args
         super *args
         
-        @dead = false
+        @alive = true
         
         @width = 39
         @height = 25
       end
       
-      def hit
-        dead = true
-      end
-      
-      def dead?
-        dead
-      end
-      
-      def draw elapsed
-        return if dead
-        
+      add_state :floating do |elapsed|
         @y -= 60 * elapsed
         @y = app.height if @y + @height < 0
         
         draw_image "ballon.png"
+      end
+      
+      add_state :falling do |elapsed|
+        @y += 60 * elapsed
+        
+        draw_image "ballon_dead.png", 7
+        
+        @discard = true if @y > app.height
+      end
+      
+      def hit
+        @alive = false
+        
+        @current_state = :falling
+      end
+      
+      def alive?
+        alive
       end
       
       def collision_bounds

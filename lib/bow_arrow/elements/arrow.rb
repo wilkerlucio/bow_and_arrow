@@ -28,7 +28,7 @@ module BowArrow
         draw_image "arrow.png"
       end
       
-      def dead?
+      def discard?
         @x > app.width
       end
       

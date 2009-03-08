@@ -45,8 +45,10 @@ module BowArrow
         
         @ballons.each do |b|
           @hero.arrows.each do |a|
+            next if b.dead?
+            
             if a & b
-              b.dead = true
+              b.hit
               @score << 10
             end
           end
@@ -54,7 +56,7 @@ module BowArrow
           b.draw elapsed
         end
         
-        @ballons.reject! {|b| b.dead?}
+        @ballons.reject! {|b| b.discard?}
         
         @hero.draw elapsed
         @score.draw elapsed

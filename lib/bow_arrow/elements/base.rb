@@ -24,6 +24,7 @@ module BowArrow
         @y = 0
         @width = 0
         @height = 0
+        @discard = false
       end
       
       def bounds
@@ -51,12 +52,24 @@ module BowArrow
         # by default, do nothing
       end
       
-      def draw_image(path)
-        app.image self.class.image_path(path), :left => @x.round, :top => @y.round
+      def draw_image(path, x_offset = 0, y_offset = 0)
+        app.image self.class.image_path(path), :left => @x.round + x_offset, :top => @y.round + y_offset
       end
       
       def &(other)
         colliding? other
+      end
+      
+      def alive?
+        true
+      end
+      
+      def dead?
+        !alive
+      end
+      
+      def discard?
+        @discard
       end
       
       private
