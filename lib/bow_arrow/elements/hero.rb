@@ -85,6 +85,15 @@ module BowArrow
       def hit
         @alive = false
       end
+
+      def collision_bounds
+        {
+          :left   => @x + 7,
+          :top    => @y + 10,
+          :right  => @x + 83,
+          :bottom => @y + 106
+        }
+      end
     end
   end
 end

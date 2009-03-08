@@ -30,7 +30,7 @@ module BowArrow
       @app = app
       @score = Score.new @app
       
-      @cur_stage = 1
+      @cur_stage = -1
       
       self.next
     end
