@@ -12,8 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'lib/bow_arrow/stages/base'
-require 'lib/bow_arrow/stages/stage_01_training'
-require 'lib/bow_arrow/stages/stage_02_more_training'
-require 'lib/bow_arrow/stages/stage_03_butterflies'
-require 'lib/bow_arrow/stages/stage_04_slimes'
+module BowArrow
+  module Stages
+    class Stage03Butterflies < Base
+      def start_level
+        @briefing = <<EOF
+You are a good guy
+Free the butterfleis!
+EOF
+        
+        30.times do
+          butterfly = Butterfly.new app
+          butterfly.x = 200 + rand(app.width - 200 - butterfly.width)
+          butterfly.y = rand(app.height - butterfly.height)
+          
+          @enemies << butterfly
+        end
+      end
+    end
+  end
+end

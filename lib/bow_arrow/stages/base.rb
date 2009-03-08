@@ -97,13 +97,13 @@ module BowArrow
         @hero.draw elapsed
         
         @enemies.each do |enemy|
+          next if enemy.dead?
+          
           if @hero & enemy
             @hero.hit
           end
           
           @hero.arrows.each do |arrow|
-            next if enemy.dead?
-            
             if arrow & enemy
               arrow.destroy if enemy.hit
               @game.score << 100

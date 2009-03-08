@@ -24,7 +24,12 @@ module BowArrow
     SCREEN_WIDTH  = 640
     SCREEN_HEIGHT = 480
     
-    STAGES = [Stages::Stage01Training, Stages::Stage02MoreTraining, Stages::Stage03Slimes]
+    STAGES = [
+      Stages::Stage01Training,
+      Stages::Stage02MoreTraining,
+      Stages::Stage03Butterflies,
+      Stages::Stage04Slimes
+    ]
     
     def initialize(app)
       @app = app
