@@ -14,17 +14,20 @@
 
 module BowArrow
   module Elements
-    SPRITES_BASE = "sprites"
+    class BallonYellow < Ballon
+      def initialize *args
+        super *args
+        
+        @speed_up = 100
+      end
+      
+      def image
+        "ballon_yellow.png"
+      end
+      
+      def image_dead
+        "ballon_yellow_dead.png"
+      end
+    end
   end
 end
-
-require 'lib/bow_arrow/elements/base'
-require 'lib/bow_arrow/elements/collection'
-require 'lib/bow_arrow/elements/state_machine'
-
-require 'lib/bow_arrow/elements/hero'
-require 'lib/bow_arrow/elements/arrow'
-require 'lib/bow_arrow/elements/ballon'
-require 'lib/bow_arrow/elements/ballon_yellow'
-require 'lib/bow_arrow/elements/score'
-require 'lib/bow_arrow/elements/paper'

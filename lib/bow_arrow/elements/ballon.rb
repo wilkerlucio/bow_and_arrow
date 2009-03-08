@@ -19,6 +19,20 @@ module BowArrow
       
       attr_accessor :alive
       
+      def self.add_states(base)
+        base.add_state :floating do |elapsed|
+          floating_state elapsed
+        end
+        
+        base.add_state :falling do |elapsed|
+          falling_state elapsed
+        end
+      end
+      
+      def self.inherited(base)
+        add_states base
+      end
+      
       def initialize *args
         super *args
         
@@ -31,20 +45,22 @@ module BowArrow
         @speed_down = 60
       end
       
-      add_state :floating do |elapsed|
+      def floating_state elapsed
         @y -= @speed_up * elapsed
         @y = app.height if @y + @height < 0
         
         draw_image image
       end
       
-      add_state :falling do |elapsed|
+      def falling_state elapsed
         @y += @speed_down * elapsed
         
         draw_image image_dead, 7
         
         @discard = true if @y > app.height
       end
+
+      add_states self
       
       def image
         "ballon.png"

@@ -33,6 +33,10 @@ module BowArrow
           
           @default_state ||= name
         end
+        
+        def states
+          @states ||= {}
+        end
       end
       
       attr_accessor :current_state
