@@ -27,7 +27,7 @@ module BowArrow
     def initialize(app)
       @app = app
       @hero = Hero.new app
-      @ballons = []
+      @ballons = Collection.new
       @score = Score.new app
       
       15.times do |i|
@@ -56,7 +56,7 @@ module BowArrow
           b.draw elapsed
         end
         
-        @ballons.reject! {|b| b.discard?}
+        @ballons.compact!
         
         @hero.draw elapsed
         @score.draw elapsed

@@ -14,15 +14,14 @@
 
 module BowArrow
   module Elements
-    SPRITES_BASE = "sprites"
+    class Collection < Array
+      def draw elapsed
+        self.each { |item| item.draw elapsed }
+      end
+      
+      def compact!
+        self.reject! { |item| item.discard? }
+      end
+    end
   end
 end
-
-require 'lib/bow_arrow/elements/base'
-require 'lib/bow_arrow/elements/collection'
-require 'lib/bow_arrow/elements/state_machine'
-
-require 'lib/bow_arrow/elements/hero'
-require 'lib/bow_arrow/elements/arrow'
-require 'lib/bow_arrow/elements/ballon'
-require 'lib/bow_arrow/elements/score'

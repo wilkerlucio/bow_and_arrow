@@ -22,7 +22,7 @@ module BowArrow
       def initialize *args
         super *args
         
-        @arrows = []
+        @arrows = Collection.new
         
         app.click do
           @current_state = :armed if @current_state == :stand
@@ -69,8 +69,8 @@ module BowArrow
         
         old_draw elapsed
         
-        @arrows.reject! { |arrow| arrow.discard? }
-        @arrows.each { |arrow| arrow.draw elapsed }
+        @arrows.compact!
+        @arrows.draw elapsed
       end
     end
   end
