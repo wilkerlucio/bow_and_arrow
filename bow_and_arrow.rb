@@ -15,12 +15,17 @@
 require 'lib/bow_arrow'
 
 Shoes.app :width => BowArrow::Base::SCREEN_WIDTH, :height => BowArrow::Base::SCREEN_HEIGHT, :resizable => false do
+  #this variable is only used for debug porpuses
+  $debug_app = self
+  
   game = BowArrow::Base.new(self)
   timer = Time.now
   
   animate(60) do
-    game.game_loop(Time.now - timer)
+    t = Time.now
     
-    timer = Time.now
+    game.game_loop(t - timer)
+    
+    timer = t
   end
 end

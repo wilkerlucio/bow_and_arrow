@@ -16,6 +16,7 @@ module BowArrow
   module Elements
     class Hero < Base
       include StateMachine
+      include TimerMachine
       
       attr_reader :arrows
       
@@ -32,8 +33,12 @@ module BowArrow
           if @current_state == :armed
             shot_arrow
             
-            @waiting_from = Time.now
+            #@waiting_from = Time.now
             @current_state = :waiting
+            
+            add_timer 0.2 do
+              @current_state = :stand
+            end
           end
         end
       end
@@ -50,8 +55,6 @@ module BowArrow
       
       add_state :waiting do |elapsed|
         draw_image "hero_without_arrow.png"
-        
-        @current_state = :stand if (Time.now - @waiting_from) > 0.2
       end
       
       def shot_arrow
@@ -65,6 +68,8 @@ module BowArrow
       alias :old_draw :draw
       
       def draw elapsed
+        update_timers elapsed
+        
         @y = app.mouse[2] - 42
         
         old_draw elapsed
