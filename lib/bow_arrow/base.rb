@@ -39,7 +39,7 @@ module BowArrow
       end
     end
     
-    def game_loop
+    def game_loop(elapsed)
       @app.clear do
         @app.background @app.rgb(0, 128, 0)
         
@@ -51,13 +51,13 @@ module BowArrow
             end
           end
           
-          b.draw
+          b.draw elapsed
         end
         
         @ballons.reject! {|b| b.dead?}
         
-        @hero.draw
-        @score.draw
+        @hero.draw elapsed
+        @score.draw elapsed
       end
     end
   end

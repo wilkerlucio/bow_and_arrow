@@ -22,8 +22,8 @@ module BowArrow
         @height = 5
       end
       
-      def draw
-        @x += 5
+      def draw elapsed
+        @x += 300 * elapsed
         
         draw_image "arrow.png"
       end

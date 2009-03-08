@@ -47,12 +47,12 @@ module BowArrow
         File.join(SPRITES_BASE, path)
       end
       
-      def draw
+      def draw elapsed
         # by default, do nothing
       end
       
       def draw_image(path)
-        app.image self.class.image_path(path), :left => @x, :top => @y
+        app.image self.class.image_path(path), :left => @x.round, :top => @y.round
       end
       
       def &(other)

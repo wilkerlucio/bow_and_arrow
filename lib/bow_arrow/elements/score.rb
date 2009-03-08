@@ -26,7 +26,7 @@ module BowArrow
         @score = 0
       end
       
-      def draw
+      def draw elapsed
         app.para "Score #{@score}", :left => @x, :top => @y
       end
       

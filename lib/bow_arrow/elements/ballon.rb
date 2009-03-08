@@ -26,14 +26,18 @@ module BowArrow
         @height = 25
       end
       
+      def hit
+        dead = true
+      end
+      
       def dead?
         dead
       end
       
-      def draw
+      def draw elapsed
         return if dead
         
-        @y -= 1
+        @y -= 60 * elapsed
         @y = app.height if @y + @height < 0
         
         draw_image "ballon.png"

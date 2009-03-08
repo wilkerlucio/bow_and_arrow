@@ -16,6 +16,11 @@ require 'lib/bow_arrow'
 
 Shoes.app :width => BowArrow::Base::SCREEN_WIDTH, :height => BowArrow::Base::SCREEN_HEIGHT, :resizable => false do
   game = BowArrow::Base.new(self)
+  timer = Time.now
   
-  animate(60) { game.game_loop }
+  animate(60) do
+    game.game_loop(Time.now - timer)
+    
+    timer = Time.now
+  end
 end
