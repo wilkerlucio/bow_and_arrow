@@ -35,7 +35,7 @@ module BowArrow
         end
         
         add_timer 0.04, 0 do
-          if rand < @frequency
+          if current_state == :running and rand < @frequency
             create_enemy
           end
         end
