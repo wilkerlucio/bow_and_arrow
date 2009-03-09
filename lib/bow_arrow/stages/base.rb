@@ -102,7 +102,7 @@ module BowArrow
           @hero.arrows.each do |arrow|
             if arrow & enemy
               arrow.destroy if enemy.hit
-              @game.score << 100
+              @game.score << 100 * @game.level
             end
           end
         end
