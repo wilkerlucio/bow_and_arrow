@@ -66,14 +66,6 @@ module BowArrow
         @game.app
       end
       
-      alias :old_draw :draw
-      
-      def draw elapsed
-        app.background app.rgb(0, 128, 0)
-        
-        old_draw elapsed
-      end
-      
       def show_message(message, elapsed)
         @paper.text = message
         @paper.draw elapsed

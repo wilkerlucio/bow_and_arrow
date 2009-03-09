@@ -45,6 +45,8 @@ module BowArrow
     
     def game_loop(elapsed)
       @app.clear do
+        app.background app.rgb(0, 128, 0)
+        
         @stage.draw elapsed
       end
     end
