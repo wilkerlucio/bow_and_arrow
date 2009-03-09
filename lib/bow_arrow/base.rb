@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'base64'
+
 require 'lib/bow_arrow/elements'
 require 'lib/bow_arrow/stages'
 
@@ -36,6 +38,9 @@ module BowArrow
     def initialize(app)
       @app = app
       @score = Score.new @app
+      @highscore = 0
+      
+      load_highscore
       
       restart
     end
@@ -43,6 +48,8 @@ module BowArrow
     def game_loop(elapsed)
       @app.clear do
         app.background app.rgb(0, 128, 0)
+        
+        app.para "Highscore: #{@highscore}"
         
         @stage.draw elapsed
       end
@@ -60,11 +67,29 @@ module BowArrow
     end
     
     def restart
-      @cur_stage = -1
+      save_highscore
+      
+      @cur_stage = 2
       @score.score = 0
       @level = 1
       
       self.next
+    end
+    
+    def load_highscore
+      if File.exist?("highscore")
+        @highscore = Base64.decode64(File.read("highscore")).to_i
+      end
+    end
+    
+    def save_highscore
+      return if @score.score < @highscore
+      
+      File.open("highscore", "wb") do |file|
+        file << Base64.encode64(@score.score.to_s)
+      end
+      
+      @highscore = @score.score
     end
   end
 end
