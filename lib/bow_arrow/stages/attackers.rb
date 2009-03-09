@@ -26,6 +26,9 @@ module BowArrow
         
         attacker_setup
         
+        @frequency += (@game.level - 1) * @frequency * 0.5
+        @frequency_speed += (@game.level - 1) * @frequency * 0.5
+        
         add_timer 3, 0 do
           @frequency += @frequecy_speed
         end
@@ -49,7 +52,7 @@ module BowArrow
         enemy = @enemy_class.new app
         enemy.x = app.width
         enemy.y = rand(480 - enemy.height)
-        enemy.speed = @game.level * enemy.speed + ((@game.level - 1) * enemy.speed * 0.3)
+        enemy.speed = @game.level * enemy.speed + ((@game.level - 1) * enemy.speed * 0.5)
         
         customize_enemy enemy
         
