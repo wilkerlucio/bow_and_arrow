@@ -69,7 +69,7 @@ module BowArrow
     def restart
       save_highscore
       
-      @cur_stage = 2
+      @cur_stage = -1
       @score.score = 0
       @level = 1
       
