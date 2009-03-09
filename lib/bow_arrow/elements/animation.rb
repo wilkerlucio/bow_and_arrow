@@ -14,24 +14,25 @@
 
 module BowArrow
   module Elements
-    class Fire < LeftMover
-      def initialize *args
-        super *args
+    class Animation
+      include TimerMachine
+      
+      def initialize element, images, frame_rate
+        @element = element
+        @images = images
+        @frame_rate = frame_rate
+        @current = 0
         
-        @width = 49
-        @height = 20
-        
-        @speed = 90
-        
-        @animation = Animation.new self, ["fire1.png", "fire2.png"], 0.2
+        add_timer 0.2, 0 do
+          @current += 1
+          @current = 0 if @current == @images.length
+        end
       end
       
-      def draw_alive elapsed
-        @animation.draw elapsed
-      end
-      
-      def draw_dead elapsed
-        draw_image "fire_dead.png"
+      def draw elapsed
+        update_timers elapsed
+        
+        @element.draw_image @images[@current]
       end
     end
   end

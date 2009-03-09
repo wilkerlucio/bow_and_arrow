@@ -22,6 +22,7 @@ require 'lib/bow_arrow/elements/base'
 require 'lib/bow_arrow/elements/collection'
 require 'lib/bow_arrow/elements/state_machine'
 require 'lib/bow_arrow/elements/left_mover'
+require 'lib/bow_arrow/elements/animation'
 
 require 'lib/bow_arrow/elements/hero'
 require 'lib/bow_arrow/elements/arrow'

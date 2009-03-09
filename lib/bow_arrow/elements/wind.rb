@@ -29,6 +29,7 @@ module BowArrow
         @bounce_speed = 3
         
         @speed = 100
+        @animation = Animation.new self, ["wind1.png", "wind2.png"], 0.2
       end
       
       def base_y
@@ -46,7 +47,7 @@ module BowArrow
       end
       
       def draw_alive elapsed
-        draw_image "wind1.png"
+        @animation.draw elapsed
       end
       
       def draw_dead elapsed
