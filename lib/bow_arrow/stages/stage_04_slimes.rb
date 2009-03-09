@@ -23,6 +23,8 @@ The slimes are comming!
 Don't let their pass!
 EOF
         
+        @fail = "You have been swallowed..."
+        
         @enemies_left = 100
         @frequency = 0.02
         @frequency_speed = 0.002
