@@ -26,23 +26,23 @@ module BowArrow
         
         attacker_setup
         
-        @enemies_left += (@game.level - 1) * @enemies_left * 0.5
+        @enemies_left += ((@game.level - 1) * @enemies_left * 0.5).round
         @frequency += (@game.level - 1) * @frequency * 0.5
         @frequency_speed += (@game.level - 1) * @frequency_speed * 0.5
         
         add_timer 3, 0 do
-          @frequency += @frequecy_speed
+          @frequency += @frequency_speed
+        end
+        
+        add_timer 0.04, 0 do
+          if rand < @frequency
+            create_enemy
+          end
         end
       end
       
       def attacker_setup
         
-      end
-      
-      def stage_loop(elapsed)
-        if rand < @frequency
-          create_enemy
-        end
       end
       
       def create_enemy
