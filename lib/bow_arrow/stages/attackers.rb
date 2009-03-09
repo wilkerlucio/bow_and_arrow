@@ -31,7 +31,7 @@ module BowArrow
         @frequency_speed += (@game.level - 1) * @frequency_speed * 0.5
         
         add_timer 3, 0 do
-          @frequency += @frequency_speed
+          @frequency += @frequency_speed if current_state == :running
         end
         
         add_timer 0.04, 0 do
