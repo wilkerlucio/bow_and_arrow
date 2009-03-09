@@ -26,6 +26,20 @@ game
 made by
 Wilker Lucio
 EOF
+        
+        if @game.level > 1
+          @briefing = <<EOF
+You did it!
+
+You passed in all stages
+but is not finished
+You now need to play again with
+a higher level of dificul!
+
+Click and try!
+EOF
+        end
+        
         @game.level.times do |x|
           15.times do |i|
             ballon = Ballon.new app
