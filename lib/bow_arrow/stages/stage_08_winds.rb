@@ -25,9 +25,9 @@ EOF
         
         @fail = "You lose your head..."
         
-        @enemies_left = 200
-        @frequency = 0.03
-        @frequency_speed = 0.003
+        @enemies_left = 250
+        @frequency = 0.035
+        @frequency_speed = 0.0035
       end
       
       def customize_enemy(enemy)
