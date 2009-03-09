@@ -14,30 +14,22 @@
 
 module BowArrow
   module Stages
-    class Stage02MoreTraining < Base
-      def start_level
+    class Stage06Fires < Attackers
+      def attacker_setup
+        @enemy_class = Fire
+        
         @briefing = <<EOF
-Ok, you got the basics
-Now let's shot at more ballons
+Know let's get a little bit
+of dificult
+
+Don't get burned!
 EOF
         
-        @game.level.times do
-          15.times do
-            ballon = Ballon.new app
-            ballon.x = 250 + rand(300)
-            ballon.y = app.height - (rand 400) - ballon.height
-            
-            @enemies << ballon
-          end
-          
-          5.times do |i|
-            ballon = BallonYellow.new app
-            ballon.x = 250 + rand(300)
-            ballon.y = app.height - (rand 400) - ballon.height
-            
-            @enemies << ballon
-          end
-        end
+        @fail = "I said to you won't get burned..."
+        
+        @enemies_left = 200
+        @frequency = 0.03
+        @frequency_speed = 0.003
       end
     end
   end

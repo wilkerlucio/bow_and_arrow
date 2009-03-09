@@ -21,7 +21,7 @@ You are a good guy
 Free the butterfleis!
 EOF
         
-        30.times do
+        (30 * @game.level).times do
           butterfly = Butterfly.new app
           butterfly.x = 200 + rand(app.width - 200 - butterfly.width)
           butterfly.y = rand(app.height - butterfly.height)

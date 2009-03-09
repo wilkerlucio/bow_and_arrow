@@ -26,13 +26,14 @@ game
 made by
 Wilker Lucio
 EOF
-        
-        15.times do |i|
-          ballon = Ballon.new app
-          ballon.x = 250 + ballon.width * i
-          ballon.y = app.height - ballon.height
-
-          @enemies << ballon
+        @game.level.times do |x|
+          15.times do |i|
+            ballon = Ballon.new app
+            ballon.x = 250 + ballon.width * i
+            ballon.y = app.height - ballon.height + x * (ballon.height * 2)
+            
+            @enemies << ballon
+          end
         end
       end
     end

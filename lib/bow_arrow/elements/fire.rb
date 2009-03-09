@@ -13,31 +13,23 @@
 # limitations under the License.
 
 module BowArrow
-  module Stages
-    class Stage02MoreTraining < Base
-      def start_level
-        @briefing = <<EOF
-Ok, you got the basics
-Now let's shot at more ballons
-EOF
+  module Elements
+    class Fire < LeftMover
+      def initialize *args
+        super *args
         
-        @game.level.times do
-          15.times do
-            ballon = Ballon.new app
-            ballon.x = 250 + rand(300)
-            ballon.y = app.height - (rand 400) - ballon.height
-            
-            @enemies << ballon
-          end
-          
-          5.times do |i|
-            ballon = BallonYellow.new app
-            ballon.x = 250 + rand(300)
-            ballon.y = app.height - (rand 400) - ballon.height
-            
-            @enemies << ballon
-          end
-        end
+        @width = 49
+        @height = 20
+        
+        @speed = 90
+      end
+      
+      def draw_alive elapsed
+        draw_image "fire1.png"
+      end
+      
+      def draw_dead elapsed
+        draw_image "fire_dead.png"
       end
     end
   end

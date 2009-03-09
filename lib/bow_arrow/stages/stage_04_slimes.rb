@@ -14,43 +14,18 @@
 
 module BowArrow
   module Stages
-    class Stage04Slimes < Base
-      include TimerMachine
-      
-      def start_level
+    class Stage04Slimes < Attackers
+      def attacker_setup
+        @enemy_class = Slime
+        
         @briefing = <<EOF
 The slimes are comming!
 Don't let their pass!
 EOF
         
-        @slimes_left = 100
+        @enemies_left = 100
         @frequency = 0.02
-        
-        add_timer 3, 0 do
-          @frequency += 0.002
-        end
-      end
-      
-      def stage_loop(elapsed)
-        if rand < @frequency
-          create_slime
-        end
-      end
-      
-      def create_slime
-        return if @slimes_left == 0
-        
-        @slimes_left -= 1
-        
-        slime = Elements::Slime.new app
-        slime.x = app.width
-        slime.y = rand(480 - slime.height)
-        
-        @enemies << slime
-      end
-      
-      def win?
-        @slimes_left == 0 and @enemies.length == 0
+        @frequency_speed = 0.002
       end
     end
   end

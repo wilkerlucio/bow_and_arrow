@@ -19,7 +19,7 @@ module BowArrow
   class Base
     include BowArrow::Elements
     
-    attr_reader :app, :score
+    attr_reader :app, :score, :level
     
     SCREEN_WIDTH  = 640
     SCREEN_HEIGHT = 480
@@ -28,12 +28,14 @@ module BowArrow
       Stages::Stage01Training,
       Stages::Stage02MoreTraining,
       Stages::Stage03Butterflies,
-      Stages::Stage04Slimes
+      Stages::Stage04Slimes,
+      Stages::Stage06Fires
     ]
     
     def initialize(app)
       @app = app
       @score = Score.new @app
+      @level = 1
       
       @cur_stage = -1
       
@@ -47,9 +49,22 @@ module BowArrow
     end
     
     def next
-      @cur_stage += 1 unless @cur_stage + 1 == STAGES.length
+      @cur_stage += 1
+      
+      if @cur_stage == STAGES.length
+        @level += 1
+        @cur_stage = 0
+      end
       
       @stage = STAGES[@cur_stage].new self
+    end
+    
+    def restart
+      @cur_stage = -1
+      @score.score = 0
+      @level = 1
+      
+      self.next
     end
   end
 end

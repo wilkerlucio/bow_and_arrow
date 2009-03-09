@@ -14,47 +14,22 @@
 
 module BowArrow
   module Elements
-    class Slime < Base
-      include StateMachine
-      include TimerMachine
-      
-      add_state :stand do |elapsed|
-        @x -= 50 * elapsed
-        
-        draw_image "slime.png"
-        
-        @discard = true if @x + @width < 0
-      end
-      
-      add_state :dead do |elapsed|
-        @x -= 10 * elapsed
-        
-        draw_image "slime_dead.png"
-      end
-      
+    class Slime < LeftMover
       def initialize *args
         super *args
         
-        @alive = true
-        
         @width = 39
         @height = 49
+        
+        @speed = 50
       end
       
-      def hit
-        @alive = false
-        
-        @current_state = :dead
-        
-        add_timer 0.6 do
-          @discard = true
-        end
-        
-        true
+      def draw_alive elapsed
+        draw_image "slime.png"
       end
       
-      def alive?
-        @alive
+      def draw_dead elapsed
+        draw_image "slime_dead.png"
       end
     end
   end

@@ -51,12 +51,8 @@ module BowArrow
         @fail = ""
         
         app.click do
-          if @current_state == :briefing
-            @current_state = :running
-            @hero.active_events
-          elsif @current_state == :fail
-            app.debug("Restart game")
-          end
+          @current_state = :running
+          @hero.active_events
         end
         
         start_level
@@ -120,6 +116,10 @@ module BowArrow
           @game.next
         elsif lose?
           @current_state = :fail
+          
+          app.click do
+            @game.restart
+          end
         end
       end
       
