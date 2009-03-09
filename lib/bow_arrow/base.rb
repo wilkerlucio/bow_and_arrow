@@ -36,11 +36,8 @@ module BowArrow
     def initialize(app)
       @app = app
       @score = Score.new @app
-      @level = 1
       
-      @cur_stage = -1
-      
-      self.next
+      restart
     end
     
     def game_loop(elapsed)
