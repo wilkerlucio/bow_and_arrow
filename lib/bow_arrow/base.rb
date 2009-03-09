@@ -29,7 +29,8 @@ module BowArrow
       Stages::Stage02MoreTraining,
       Stages::Stage03Butterflies,
       Stages::Stage04Slimes,
-      Stages::Stage06Fires
+      Stages::Stage06Fires,
+      Stages::Stage08Winds
     ]
     
     def initialize(app)

@@ -12,11 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'lib/bow_arrow/stages/base'
-require 'lib/bow_arrow/stages/attackers'
-require 'lib/bow_arrow/stages/stage_01_training'
-require 'lib/bow_arrow/stages/stage_02_more_training'
-require 'lib/bow_arrow/stages/stage_03_butterflies'
-require 'lib/bow_arrow/stages/stage_04_slimes'
-require 'lib/bow_arrow/stages/stage_06_fires'
-require 'lib/bow_arrow/stages/stage_08_winds'
+module BowArrow
+  module Stages
+    class Stage08Winds < Attackers
+      def attacker_setup
+        @enemy_class = Wind
+        
+        @briefing = <<EOF
+Cauting with the wind!
+He can cut your head off!
+EOF
+        
+        @fail = "You lose your head..."
+        
+        @enemies_left = 200
+        @frequency = 0.03
+        @frequency_speed = 0.003
+      end
+      
+      def customize_enemy(enemy)
+        enemy.bounce += (@game.level - 1) * enemy.bounce * 0.5
+        enemy.bounce_speed += (@game.level - 1) * enemy.bounce_speed * 0.5
+      end
+    end
+  end
+end
