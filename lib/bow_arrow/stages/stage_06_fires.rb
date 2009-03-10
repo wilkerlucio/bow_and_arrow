@@ -15,9 +15,9 @@
 module BowArrow
   module Stages
     class Stage06Fires < Attackers
+      enemy_class Fire
+      
       def attacker_setup
-        @enemy_class = Fire
-        
         @briefing = <<EOF
 Know let's get a little bit
 of dificult

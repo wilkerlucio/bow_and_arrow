@@ -15,9 +15,9 @@
 module BowArrow
   module Stages
     class Stage08Winds < Attackers
+      enemy_class Wind
+      
       def attacker_setup
-        @enemy_class = Wind
-        
         @briefing = <<EOF
 Cauting with the wind!
 He can cut your head off!
