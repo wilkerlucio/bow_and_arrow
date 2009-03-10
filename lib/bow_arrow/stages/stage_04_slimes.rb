@@ -15,9 +15,9 @@
 module BowArrow
   module Stages
     class Stage04Slimes < Attackers
+      enemy_class Slime
+      
       def attacker_setup
-        @enemy_class = Slime
-        
         @briefing = <<EOF
 The slimes are comming!
 Don't let their pass!

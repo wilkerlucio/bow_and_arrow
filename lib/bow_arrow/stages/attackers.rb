@@ -17,14 +17,20 @@ module BowArrow
     class Attackers < Base
       include TimerMachine
       
+      class << self
+        def enemy_class(enemy_class = nil)
+          @enemy_class = enemy_class unless enemy_class.nil?
+          @enemy_class
+        end
+      end
+      
       def start_level
         #setup overwrite these variables
-        @enemy_class = nil
         @enemies_left = 0
         @frequency = 0.0
         @frequency_speed = 0.0
         
-        attacker_setup
+        attacker_setup if respond_to? :attacker_setup
         
         @enemies_left += ((@game.level - 1) * @enemies_left * 0.5).round
         @frequency += (@game.level - 1) * @frequency * 0.5
@@ -41,27 +47,19 @@ module BowArrow
         end
       end
       
-      def attacker_setup
-        
-      end
-      
       def create_enemy
         return if @enemies_left == 0
         
         @enemies_left -= 1
         
-        enemy = @enemy_class.new app
+        enemy = self.class.enemy_class.new app
         enemy.x = app.width
         enemy.y = rand(480 - enemy.height)
         enemy.speed = @game.level * enemy.speed + ((@game.level - 1) * enemy.speed * 0.5)
         
-        customize_enemy enemy
+        customize_enemy enemy if respond_to? :customize_enemy
         
         @enemies << enemy
-      end
-      
-      def customize_enemy(enemy)
-        
       end
       
       def win?
